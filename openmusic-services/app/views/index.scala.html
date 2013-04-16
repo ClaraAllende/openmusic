@@ -1,0 +1,28 @@
+@(songs: Iterable[model.metadata.Metadata])
+@import views.Helper._
+
+@main("openmusic- Songs") {
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery(".content").hide();
+            jQuery(".heading").click(function() {
+                jQuery(this).next(".content").slideToggle(500);
+            });
+        });
+    </script>
+
+	@for(s <- songs) {
+	  <div class="heading">
+                <span class="songName"> @(getName(s)) </span>
+		</div>
+		<div class="content">
+                        <table>
+			<tr><td>@(getPath(s))</td></tr>
+		       	<tr><td>U@(getUUID(s))</td></tr>
+                        
+                        </table>
+    		</div>
+		
+	}
+
+}
