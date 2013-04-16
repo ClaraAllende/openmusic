@@ -30,19 +30,19 @@ import model.configuration.Configuration
 object MetadataManager {
 
 
-  def all: List[Metadata] = {
-
-    return new File(Configuration.load.getString("openmusic.folder").getOrElse(""))
-      .listFiles()
-      .filter({
-      elem => elem.isFile()
-    })
-      .map({
-      elem => this createMetadata elem
-    })
-      .toList
-
-  }
+//  def all: List[Metadata] = {
+//
+//    return new File(Configuration.load.getString("openmusic.folder").getOrElse(""))
+//      .listFiles()
+//      .filter({
+//      elem => elem.isFile()
+//    })
+//      .map({
+//      elem => this createMetadata elem
+//    })
+//      .toList
+//
+//  }
   
   def recursiveAll = {
     val files = new File(Configuration.load.getString("openmusic.folder").getOrElse("")).listFiles()
@@ -56,7 +56,7 @@ object MetadataManager {
   }
  
   def find(id: Int): Metadata = {
-    return this.all.find {
+    return this.recursiveAll.find {
       elem => elem.uuid.equals(id)
     }.get
   }
