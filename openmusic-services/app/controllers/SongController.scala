@@ -24,11 +24,12 @@ import play.api._
 import play.api.mvc._
 import model.metadata.MetadataManager
 import model.services.Jsonable
+import views.html
 
 object SongController extends Controller with Jsonable {
-
+	
   def index = Action {
-    Ok("Your new application is ready.")
+    Ok(html.index(MetadataManager.recursiveAll))
   }
 
   def list = Action {
