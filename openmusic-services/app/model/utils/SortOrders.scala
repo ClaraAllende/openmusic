@@ -1,6 +1,6 @@
 /*Copyright (c) 2013 -  SideEffectIdeas
 *
-*	Module: openmusic-services - controllers
+*	Module: openmusic-services - utils
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -18,38 +18,15 @@
 *   Wiki: http://github.com/SideEffectIdeas/openmusic-node/wiki
 *   Mailing list: http://groups.google.com/group/sideEffectIdeas
 */
-package controllers
 
-import play.api._
-import libs.iteratee.Enumerator
-import play.api.mvc._
-import model.metadata.MetadataManager
-import model.services.Jsonable
-import model.utils.SortOrders
 
-object SongController extends Controller with Jsonable with SortOrders{
+package model.utils
 
-  def index = Action {
-    Ok("Your new application is ready.")
-  }
+import model.metadata.Metadata
 
-  def list = Action {
-    Ok {
-      ListToJson(MetadataManager.all.sortWith(alphabethicalOrder))
-    }
-  }
+trait SortOrders {
 
-  def metadata(id : Int) = Action {
-    Ok{
-      toJson(MetadataManager.find(id))
-    }
-  }
+def alphabethicalOrder(a:Metadata, b:Metadata) = a.nombre.toLowerCase < b.nombre.toLowerCase
+ 
+}	
 
-  def retrieve(id: Int) = Action {
-    Ok.stream {
-      val file = MetadataManager.find(id).retrieve
-      Enumerator.fromFile(file);
-    }.as("audio/mpeg")
-  }
-
-}

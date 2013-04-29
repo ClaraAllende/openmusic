@@ -40,6 +40,7 @@ build.log
 #SHITTY output not in target directory
 build.log
 .cache
+.DS_Store
 
 #gradle
 .gradle

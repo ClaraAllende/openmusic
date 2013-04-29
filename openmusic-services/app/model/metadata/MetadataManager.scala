@@ -26,19 +26,19 @@ import model.configuration.Configuration
 
 object MetadataManager {
 
-  def recursiveAll = {
+  def all = {
     val files = new File(Configuration.load.getString("openmusic.folder").getOrElse("")).listFiles()
-    files.flatMap(elem => all(elem)).toList
+    files.flatMap(elem => processFile(elem)).toList
   }
 
-  def all(file:File): List[Metadata] = {
+  def processFile(file:File): List[Metadata] = {
      if (file.isFile()) List(this createMetadata file)
-     else { if (file.isDirectory()) file.listFiles().flatMap(e=> all(e)).toList else List()}
+     else { if (file.isDirectory()) file.listFiles().flatMap(e=> processFile(e)).toList else List()}
    
   }
  
   def find(id: Int): Metadata = {
-    return this.recursiveAll.find {
+    return this.all.find {
       elem => elem.uuid.equals(id)
     }.get
   }

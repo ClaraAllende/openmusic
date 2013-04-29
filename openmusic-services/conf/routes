@@ -2,6 +2,13 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+
+
+# Single Page Application
+
+GET     /                           controllers.Application.index
+
+
 # Songs services
 GET     /song                       controllers.SongController.index
 GET     /song/list                  controllers.SongController.list
