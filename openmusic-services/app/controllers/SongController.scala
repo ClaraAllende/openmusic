@@ -35,7 +35,7 @@ object SongController extends Controller with Jsonable with SortOrders{
 
   def list = Action {
     Ok {
-      ListToJson(MetadataManager.all.sortWith(alphabethicalOrder))
+      ListToJson(MetadataManager.all)
     }
   }
 

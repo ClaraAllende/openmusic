@@ -23,9 +23,9 @@ package model.metadata
 
 import java.io.File
 import model.configuration.Configuration
+import model.utils.SortOrders
 
-
-object MetadataManager {
+object MetadataManager extends SortOrders {
 
   def all = {
     val files = new File(Configuration.load.getString("openmusic.folder").getOrElse("")).listFiles()
@@ -34,7 +34,8 @@ object MetadataManager {
 
   def processFile(file:File): List[Metadata] = {
      if (file.isFile()) List(this createMetadata file)
-     else { if (file.isDirectory()) file.listFiles().flatMap(e=> processFile(e)).toList else List()}
+     else { if (file.isDirectory()) file.listFiles().flatMap(e=> processFile(e)).toList.sortWith(alphabethicalOrder) 
+	    else List()}
    
   }
  
