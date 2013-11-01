@@ -10,7 +10,9 @@ GET     /                           controllers.Application.index
 
 
 # Songs services
-GET     /song                       controllers.SongController.index
+
+#I'm going to deprecate this url, until we have a proper home page.
+#GET     /song                       controllers.SongController.index
 GET     /song/list                  controllers.SongController.list
 GET     /song/:id                   controllers.SongController.retrieve(id: Int)
 GET     /song/:id/metadata          controllers.SongController.metadata(id: Int)

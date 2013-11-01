@@ -31,7 +31,9 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     jdbc,
     anorm,
-    "com.google.code.gson" % "gson" % "2.2.2"
+    "com.google.code.gson" % "gson" % "2.2.2",
+     "de.flapdoodle.embed" % "de.flapdoodle.embed.mongo" % "1.31" exclude("commons-io", "commons-io"),
+     "org.mongodb" %% "casbah" % "2.6.3"
   )
 
 

@@ -27,4 +27,7 @@ object Configuration {
 
   def load = Play.application.configuration
 
+  @volatile private var conf = load
+
+  def mongodbServer = conf.getString("openmusic.mongoServer").getOrElse("127.0.0.1:27017")
 }
